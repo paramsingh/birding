@@ -7,3 +7,7 @@ pyvenv.cfg
 # Data files
 data/
 data.zip
+
+# Virtual environment folders (alternative names)
+etc/
+share/
