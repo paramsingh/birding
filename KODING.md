@@ -28,6 +28,14 @@ This project is for the BirdCLEF 2025 Kaggle competition, focusing on identifyin
 *   **Notebooks:** If using Jupyter notebooks, keep cells concise and add markdown for explanations. Clear outputs before committing.
 *   **Dependencies:** Add new dependencies to `requirements.txt`.
 
+## Development Workflow
+
+For any significant work:
+
+1.  **Write Tests:** Implement tests *before* writing or changing the corresponding code (Test-Driven Development approach).
+2.  **Implement Code:** Write or modify the code to meet the requirements and pass the tests.
+3.  **Create Notebook (Optional):** If relevant, create a Jupyter notebook to demonstrate the functionality, ensuring clear explanations and aesthetics. Clear outputs before committing.
+
 ## Codebase Structure
 
 *   `data/`: Contains competition data (ignored by git).
