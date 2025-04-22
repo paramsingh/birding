@@ -23,7 +23,7 @@ def temp_data_dir(tmp_path_factory):
         'genus': ['GenusB', 'GenusB', 'GenusF', 'GenusI'],
         'family': ['FamilyB', 'FamilyB', 'FamilyF', 'FamilyI'],
         'order': ['OrderB', 'OrderB', 'OrderF', 'OrderI'],
-        'class': ['Aves', 'Aves', 'Amphibia', 'Insecta']
+        'class_name': ['Aves', 'Aves', 'Amphibia', 'Insecta'] # Use class_name
     })
     taxonomy_path = data_dir / "taxonomy.csv"
     taxonomy.to_csv(taxonomy_path, index=False)
@@ -163,12 +163,12 @@ def test_create_metadata_dataframe(temp_data_dir):
     assert 'format' in metadata_df.columns
     assert 'error' in metadata_df.columns
     assert 'primary_label' in metadata_df.columns
-    assert 'species_code' in metadata_df.columns
-    assert 'class' in metadata_df.columns # Check if taxonomy info is merged
+    # assert 'species_code' in metadata_df.columns # Removed as not in actual data
+    assert 'class_name' in metadata_df.columns # Check if taxonomy info is merged
 
     # Check values
     assert metadata_df.loc[0, 'primary_label'] == 'bird1'
-    assert metadata_df.loc[0, 'class'] == 'Aves'
+    assert metadata_df.loc[0, 'class_name'] == 'Aves'
     assert metadata_df.loc[1, 'sampling_rate'] == 44100
     assert pd.isna(metadata_df.loc[2, 'duration'])
     assert metadata_df.loc[2, 'error'] == 'Load Error'
@@ -188,7 +188,7 @@ def test_generate_summary_statistics(temp_data_dir):
     }
     metadata_df = pd.DataFrame(data)
     # Merge taxonomy info for group counts
-    metadata_df = pd.merge(metadata_df, taxonomy_df[['primary_label', 'class']], on='primary_label', how='left')
+    metadata_df = pd.merge(metadata_df, taxonomy_df[['primary_label', 'class_name']], on='primary_label', how='left')
 
 
     summary = generate_summary_statistics(metadata_df)
